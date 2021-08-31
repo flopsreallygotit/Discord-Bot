@@ -4,7 +4,7 @@ import wikipedia
 import bad_words #My module
 import random
 import random_number #My module
-wikipedia.set_lang('Choose your language')
+wikipedia.set_lang('en')
 
 time_now = str(time_command.time_now())
 
@@ -24,7 +24,7 @@ async def on_message(message):
     name, tag = author.split('#')
     print(time_now, '['+name+']: ' + message.content)
 
-    if name != 'Name of your BOT':
+    if name != 'Name of your BOT': #Enter bot name(without tag)
 
         for i in greetings:
             if i in message.content.lower():
@@ -34,23 +34,17 @@ async def on_message(message):
             print(time_now + ' [Command]: hello ')
             await message.channel.send('Hi, ' + name + '!')
         
-        if message.content.lower() == 'time' or message.content.lower() == '!time':
+        if message.content.lower() == ':time' or message.content.lower() == '!time':
             print(time_now + ' [Command]: time')
             await message.channel.send(time_command.now())
 
-        if 'timer' in message.content.lower():
-            print(time_now + ' [Command]: timer')
-            command, timer_time = map(str, message.content.lower().split())
-            time_command.timer(timer_time)
-            await message.channel.send('Time!') #Help me with timer please. When time ends, bot restarts
-
-        if 'wiki' in message.content.lower():
+        if ':wiki' in message.content.lower():
             print(time_now + ' [Command]: wiki')
             search = message.content.lower().replace('wiki ','')
             page = wikipedia.page(search)
             await message.channel.send(page.content[0:1500] + '. Read it on: ' + page.url)
 
-        if '!ran' in message.content.lower():
+        if ':ran' in message.content.lower():
             print(time_now + ' [Command]: random')
             command, num1, num2 = map(str, message.content.lower().split())
             await message.channel.send(random_number.n(int(num1), int(num2)))
@@ -58,11 +52,9 @@ async def on_message(message):
         for i in bad_words.words():
             if i in message.content.lower():
                 print(time_now + ' [Bad Words]: 1') #Bot detected bad word, you must enter them yourself in bad_words.py
-                answers = []
+                answers = ['I condemn it']
                 answer = random.choice(answers)
                 await message.channel.send(answer)
                 break
 
 client.run(token) #email me if u have any questions or for collab 
-
-
