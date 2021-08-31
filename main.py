@@ -1,16 +1,16 @@
 import discord
-import  time_command #My module
+import  time_command # My module
 import wikipedia
-import bad_words #My module
+import bad_words # My module
 import random
-import random_number #My module
-wikipedia.set_lang('en')
+import random_number # My module
+wikipedia.set_lang('en') # You can choose any language, check https://pypi.org/project/wikipedia/
 
 time_now = str(time_command.time_now())
 
-greetings = ['привет', 'hello', 'здорово', 'hi']
+greetings = ['привет', 'hello', 'здорово', 'hi'] # Greetings that bot reacts on, you can edit it
 
-token = '' #Enter your token
+token = '' # Enter your token
 client = discord.Client()
 
 @client.event
